@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Book a Service | AutoCare Garage</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <header class="site-header">
+        <div class="container">
+            <a class="logo" href="index.html">AutoCare Garage</a>
+            <nav>
+                <ul class="nav-links">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="index.html#services">Services</a></li>
+                    <li><a class="active" href="service.html">Book a Service</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container service-layout">
+        <!-- novalidate: validation is done by validateServiceForm() in js/script.js -->
+        <form id="serviceForm" action="process_service.php" method="POST" novalidate>
+
+            <fieldset>
+                <legend>Customer Details</legend>
+                <div class="form-group">
+                    <label for="customerName">Customer Name</label>
+                    <input type="text" id="customerName" name="customer_name" placeholder="e.g. Jane Wanjiku">
+                    <span class="error" id="error-customerName"></span>
+                </div>
+                <div class="form-group">
+                    <label for="phone">Phone Number (10 digits)</label>
+                    <input type="tel" id="phone" name="phone" placeholder="0712345678" maxlength="10">
+                    <span class="error" id="error-phone"></span>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email Address</label>
+                    <input type="email" id="email" name="email" placeholder="you@example.com">
+                    <span class="error" id="error-email"></span>
+                </div>
+            </fieldset>
+
+            <fieldset>
+                <legend>Vehicle Details</legend>
+                <div class="form-group">
+                    <label for="regNumber">Vehicle Registration Number</label>
+                    <input type="text" id="regNumber" name="reg_number" placeholder="e.g. KDA 123A">
+                    <span class="error" id="error-regNumber"></span>
+                </div>
+                <div class="form-group">
+                    <label for="vehicleType">Vehicle Type</label>
+                    <select id="vehicleType" name="vehicle_type">
+                        <option value="">-- Select vehicle type --</option>
+                        <option value="saloon">Saloon Car</option>
+                        <option value="suv">SUV</option>
+                        <option value="pickup">Pickup</option>
+                        <option value="van">Van</option>
+                    </select>
+                    <div class="notice hidden" id="vehicleInfo"></div>
+                    <span class="error" id="error-vehicleType"></span>
+                </div>
+                <div class="form-group">
+                    <label for="vehicleModel">Vehicle Model</label>
+                    <input type="text" id="vehicleModel" name="vehicle_model" placeholder="e.g. Toyota Fielder">
+                    <span class="error" id="error-vehicleModel"></span>
+                </div>
+                <div class="form-group">
+                    <label for="vehicleYear">Year of Manufacture</label>
+                    <input type="number" id="vehicleYear" name="vehicle_year" placeholder="e.g. 2015">
+                    <div class="warning hidden" id="ageWarning"></div>
+                    <span class="error" id="error-vehicleYear"></span>
+                </div>
+                <div class="form-group">
+                    <label for="serviceDate">Preferred Service Date</label>
+                    <input type="date" id="serviceDate" name="service_date">
+                    <span class="error" id="error-serviceDate"></span>
+                </div>
+            </fieldset>
+
+            <fieldset>
+                <legend>Required Services (select one or more)</legend>
+                <div class="service-grid" id="services" tabindex="-1">
+                    <label class="service-option"><input type="checkbox" name="services[]" value="oil_change"> Engine Oil Change <span class="cost">KSh 3,000</span></label>
+                    <label class="service-option"><input type="checkbox" name="services[]" value="brake_inspection"> Brake Inspection <span class="cost">KSh 2,000</span></label>
+                    <label class="service-option"><input type="checkbox" name="services[]" value="wheel_alignment"> Wheel Alignment <span class="cost">KSh 2,500</span></label>
+                    <label class="service-option"><input type="checkbox" name="services[]" value="computer_diagnosis"> Computer Diagnosis <span class="cost">KSh 3,500</span></label>
+                    <label class="service-option"><input type="checkbox" name="services[]" value="full_service"> Full Service <span class="cost">KSh 8,000</span></label>
+                    <!-- Individualization requirement (digit 4): tyre balancing at KSh 2,000 -->
+                    <label class="service-option new-service"><input type="checkbox" name="services[]" value="tyre_balancing"> Tyre Balancing <span class="cost">KSh 2,000</span></label>
+                </div>
+                <span class="error" id="error-services"></span>
+            </fieldset>
+
+            <!-- Total calculated by JavaScript, sent only so PHP can compare; PHP never trusts it -->
+            <input type="hidden" id="jsTotal" name="js_total" value="0">
+
+            <button type="submit" class="btn">Submit Service Request</button>
+            <button type="reset" class="btn btn-secondary" id="resetBtn">Clear Form</button>
+        </form>
+
+        <aside class="summary-card" aria-live="polite">
+            <h2>Your Estimate</h2>
+            <p class="info summary-count" id="serviceCount">No services selected.</p>
+            <div id="summaryLines"></div>
+            <div class="summary-total"><span>Estimated Total</span><span id="totalAmount">KSh 0</span></div>
+        </aside>
+    </main>
+
+    <footer class="site-footer">&copy; 2026 AutoCare Garage. All rights reserved.</footer>
+
+    <script src="js/script.js"></script>
+</body>
+</html>

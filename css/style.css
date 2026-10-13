@@ -1,0 +1,126 @@
+/* ==========================================================
+   AutoCare Garage - shared stylesheet
+   Sections: 1. Variables  2. Base  3. Layout  4. Components
+   ========================================================== */
+
+/* 1. Variables */
+:root {
+    --charcoal: #1f2933;
+    --orange: #f26b1d;
+    --orange-dark: #c8530d;
+    --light: #f4f5f7;
+    --white: #ffffff;
+    --text: #27303a;
+    --muted: #6b7280;
+    --danger: #c0392b;
+    --success: #1e8449;
+    --border: #d5d9df;
+    --radius: 10px;
+}
+
+/* 2. Base */
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+    font-family: "Segoe UI", Tahoma, Arial, sans-serif;
+    background: var(--light);
+    color: var(--text);
+    line-height: 1.6;
+}
+h1, h2, h3 { color: var(--charcoal); }
+a { color: var(--orange-dark); }
+
+/* 3. Layout */
+.container { max-width: 1100px; margin: 0 auto; padding: 2rem 1.25rem; }
+
+.site-header { background: var(--charcoal); }
+.site-header .container {
+    display: flex; justify-content: space-between; align-items: center;
+    padding-top: 1rem; padding-bottom: 1rem; flex-wrap: wrap; gap: .5rem;
+}
+.logo { color: var(--orange); font-size: 1.5rem; font-weight: 800; text-decoration: none; letter-spacing: .5px; }
+.nav-links { list-style: none; display: flex; gap: 1.5rem; }
+.nav-links a { color: var(--white); text-decoration: none; padding-bottom: 3px; }
+.nav-links a:hover, .nav-links a.active { border-bottom: 2px solid var(--orange); }
+
+.hero { background: var(--charcoal); color: var(--white); text-align: center; padding: 5rem 1.25rem; }
+.hero h1 { color: var(--white); font-size: 2.6rem; margin-bottom: .75rem; }
+.hero p { max-width: 580px; margin: 0 auto 1.5rem; }
+
+.card-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1.25rem; margin-top: 1.25rem; }
+.service-layout { display: grid; grid-template-columns: 2fr 1fr; gap: 1.5rem; align-items: start; }
+
+.site-footer { background: var(--charcoal); color: var(--white); text-align: center; padding: 1.25rem; margin-top: 2rem; }
+
+/* 4. Components */
+.btn {
+    display: inline-block; background: var(--orange); color: var(--white); border: none;
+    padding: .75rem 1.6rem; border-radius: var(--radius); font-size: 1rem; font-weight: 600;
+    cursor: pointer; text-decoration: none;
+}
+.btn:hover { background: var(--orange-dark); }
+.btn-secondary { background: transparent; border: 2px solid var(--charcoal); color: var(--charcoal); }
+.btn-secondary:hover { background: var(--charcoal); color: var(--white); }
+
+.card, .summary-card, .confirmation {
+    background: var(--white); border: 1px solid var(--border);
+    border-radius: var(--radius); padding: 1.25rem;
+}
+.card h3 { margin-bottom: .4rem; }
+.price { color: var(--orange-dark); font-weight: 700; }
+
+fieldset { border: 1px solid var(--border); border-radius: var(--radius); padding: 1rem 1.25rem; margin-bottom: 1.25rem; background: var(--white); }
+legend { color: var(--charcoal); font-weight: 700; padding: 0 .5rem; }
+
+.form-group { margin-bottom: 1rem; }
+label { display: block; font-weight: 600; margin-bottom: .25rem; }
+
+input[type="text"], input[type="email"], input[type="tel"],
+input[type="number"], input[type="date"], select {
+    width: 100%; padding: .6rem .75rem; border: 1px solid var(--border);
+    border-radius: 6px; font-size: 1rem; background: var(--white);
+}
+input:focus, select:focus { outline: 2px solid var(--orange); border-color: var(--orange); }
+input.invalid, select.invalid { border-color: var(--danger); background: #fdf0ee; }
+
+.service-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: .6rem; padding: .25rem; border-radius: 6px; }
+.service-grid.invalid { outline: 2px solid var(--danger); }
+.service-option {
+    display: flex; align-items: center; gap: .6rem; font-weight: 400; margin: 0;
+    border: 1px solid var(--border); border-radius: 8px; padding: .6rem .75rem; cursor: pointer;
+}
+.service-option:hover { border-color: var(--orange); }
+.service-option input { width: auto; }
+.service-option .cost { margin-left: auto; font-weight: 700; color: var(--orange-dark); white-space: nowrap; }
+.service-option.new-service { border-left: 4px solid var(--orange); }
+
+.error { display: block; color: var(--danger); font-size: .85rem; min-height: 1.1rem; }
+.info { color: var(--muted); font-size: .9rem; }
+.notice { background: #e8f1fb; border-left: 4px solid #2f6fb3; padding: .5rem .75rem; margin-top: .4rem; border-radius: 4px; font-size: .9rem; }
+.warning { background: #fff1e0; border-left: 4px solid var(--orange); padding: .5rem .75rem; margin-top: .4rem; border-radius: 4px; }
+.hidden { display: none; }
+
+.summary-card { position: sticky; top: 1rem; }
+.summary-card h2 { margin-bottom: .25rem; font-size: 1.3rem; }
+.summary-count { margin-bottom: .75rem; }
+.summary-row { display: flex; justify-content: space-between; gap: .75rem; padding: .35rem 0; border-bottom: 1px dashed var(--border); }
+.summary-total { display: flex; justify-content: space-between; margin-top: .75rem; font-size: 1.2rem; font-weight: 700; color: var(--charcoal); }
+
+.confirmation { max-width: 640px; margin: 0 auto; }
+.confirmation h1 { text-align: center; margin-bottom: 1rem; }
+.confirmation.success h1 { color: var(--success); }
+.confirmation.failed h1 { color: var(--danger); }
+.confirmation table { width: 100%; border-collapse: collapse; margin: 1rem 0; }
+.confirmation td { padding: .45rem .25rem; border-bottom: 1px solid var(--border); }
+.confirmation td:first-child { font-weight: 600; width: 45%; }
+.confirmation .total-row td { font-size: 1.2rem; color: var(--charcoal); border-bottom: none; }
+.confirmation h3 { margin-top: 1rem; }
+.confirmation ul { margin: .5rem 0 1rem 1.5rem; }
+.confirmation.failed ul { color: var(--danger); }
+.thanks { text-align: center; margin: 1rem 0; }
+
+@media (max-width: 800px) {
+    .service-layout { grid-template-columns: 1fr; }
+    .summary-card { position: static; }
+    .hero h1 { font-size: 2rem; }
+}
